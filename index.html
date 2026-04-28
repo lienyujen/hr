@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>公司 OKR 追蹤系統</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>公司 OKR 追蹤系統</h1>
+    <p>支援 2026 年起跨年度追蹤、主管派發、同仁自評與檢核留言</p>
+  </header>
+
+  <main>
+    <section id="loginSection" class="card">
+      <h2>登入</h2>
+      <div class="grid-two">
+        <label>
+          使用者
+          <select id="loginUser"></select>
+        </label>
+        <label>
+          年度
+          <input id="activeYear" type="number" min="2026" value="2026" />
+        </label>
+      </div>
+      <button id="loginBtn">登入系統</button>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <div class="card">
+        <div class="toolbar">
+          <h2 id="welcome"></h2>
+          <button id="logoutBtn" class="secondary">登出</button>
+        </div>
+        <p><strong>組織：</strong>總經理 → 業務部 / 工程研發部 / 廠務部 / 管理部（依附圖建置）</p>
+      </div>
+
+      <section class="card">
+        <h3>我的可管理同仁</h3>
+        <div class="grid-two">
+          <label>
+            選擇同仁
+            <select id="employeeSelect"></select>
+          </label>
+          <label>
+            選擇年度
+            <input id="yearSelect" type="number" min="2026" value="2026" />
+          </label>
+        </div>
+        <div class="actions">
+          <button id="loadPrevBtn" class="secondary">帶入前一年 OKR</button>
+          <button id="addObjectiveBtn">新增 Objective</button>
+        </div>
+        <div id="okrEditor"></div>
+        <button id="saveOkrBtn">儲存該同仁年度 OKR</button>
+      </section>
+
+      <section class="card">
+        <h3>同仁自評 / 檢核留言</h3>
+        <p>同仁可針對每個 KR 填寫完成比例（0-100）與每次檢核點留言。</p>
+        <div id="selfReview"></div>
+      </section>
+
+      <section class="card">
+        <h3>年度達標率統計</h3>
+        <div class="grid-two">
+          <label>
+            統計年度
+            <input id="reportYear" type="number" min="2026" value="2026" />
+          </label>
+          <label>
+            部門篩選
+            <select id="reportDepartment"></select>
+          </label>
+        </div>
+        <button id="generateReportBtn">產生統計</button>
+        <div id="reportArea"></div>
+      </section>
+    </section>
+  </main>
+
+  <template id="objectiveTemplate">
+    <div class="objective">
+      <label>Objective 名稱<input class="objective-title" type="text" placeholder="例如：提升交期達成率" /></label>
+      <label>Objective 說明<textarea class="objective-desc" rows="2" placeholder="此 Objective 的方向與價值"></textarea></label>
+      <div class="kr-list"></div>
+      <div class="actions">
+        <button class="add-kr-btn secondary" type="button">新增 KR</button>
+        <button class="remove-objective-btn danger" type="button">刪除 Objective</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="krTemplate">
+    <div class="kr-item">
+      <label>KR 指標<input class="kr-title" type="text" placeholder="例如：準時交貨率提升至 95%" /></label>
+      <label>目標值 / 標準<input class="kr-target" type="text" placeholder="例如：95%" /></label>
+      <button class="remove-kr-btn danger" type="button">刪除 KR</button>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
